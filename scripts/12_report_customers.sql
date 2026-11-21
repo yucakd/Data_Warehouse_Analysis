@@ -43,7 +43,7 @@ f.quantity,
 c.customer_key,
 c.customer_number,
 CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
-DATEDIFF(year, c.birthdate, GETDATE()) age
+DATEDIFF(year, c.birthdate, (SELECT MAX(order_date) FROM gold.fact_sales)) age
 FROM gold.fact_sales f
 LEFT JOIN gold.dim_customers c
 ON c.customer_key = f.customer_key
@@ -89,11 +89,11 @@ CASE
     ELSE 'New'
 END AS customer_segment,
 last_order_date,
-DATEDIFF(month, last_order_date, GETDATE()) AS recency,
+DATEDIFF(month, last_order_date, (SELECT MAX(order_date) FROM gold.fact_sales)) AS recency,
 total_orders,
 total_sales,
 total_quantity,
-total_products
+total_products,
 lifespan,
 -- Compuate average order value (AVO)
 CASE WHEN total_sales = 0 THEN 0

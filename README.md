@@ -118,6 +118,3 @@ Sales went from 7.08M in 2011 to 5.84M in 2012 (−17%), then jumped to **16.34M
 
 SQL Server · T-SQL · Power BI · DAX
 
-## Credits
-
-Dataset and project structure are based on Baraa Salkini's SQL course.
